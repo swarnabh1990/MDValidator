@@ -1,0 +1,15 @@
+﻿@model List<string>
+
+<div class="errors panel panel-danger">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Errors</div>
+    <div class="panel-body">
+        <ul>
+            @foreach (var error in Model)
+            {
+                <li><p>@error</p></li>
+            }
+        </ul>
+    </div>
+</div>
+

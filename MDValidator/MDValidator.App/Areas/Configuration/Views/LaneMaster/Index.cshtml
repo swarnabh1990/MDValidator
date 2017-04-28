@@ -1,0 +1,197 @@
+@using MDValidator.App.Models
+@using MDValidator.App.Areas.Configuration.Models.LaneMaster
+@using MDValidator.Domain.Configuration.LaneMaster
+
+@model LaneMasterViewModel
+
+@{
+    ViewData["Title"] = "Lane Master";
+}
+
+@if (Model.Errors != null && Model.Errors.Count > 0)
+{
+    <div class="errors panel panel-danger">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Errors</div>
+        <div class="panel-body">
+            <ul>
+                @foreach (var error in Model.Errors)
+                {
+                    <li><p>@error</p></li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<section class="controls well well-lg">
+    @await Html.PartialAsync("_FileUploadControl", new FileUploadControlViewModel("Upload Lane Master File"))
+    <button class="btn btn-success"><i class="fa fa-download fa-fw"></i> Download</button>&nbsp;&nbsp;
+    <button class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Save</button>
+</section>
+
+<br />
+
+@if ((Model.Errors != null && Model.Errors.Count == 0) && (Model.LaneMaster != null && Model.LaneMaster.Count > 0))
+{
+   <div class="table-responsive">
+       <table class="table table-condensed table-bordered table-hover table-striped">
+           <tr>
+               <th class="bg-primary">
+                   LANE
+               </th>
+               <th class="bg-primary">
+                   ORIGIN
+               </th>
+               <th class="bg-primary">
+                   DESTINATION
+               </th>
+               <th class="bg-primary">
+                   MTART
+               </th>
+               <th class="bg-primary">
+                   LEG
+               </th>
+               <th class="bg-primary">
+                   SITE
+               </th>
+               <th class="bg-primary">
+                   SYSID
+               </th>
+               <th class="bg-primary">
+                   SCENARIO
+               </th>
+               <th class="bg-primary">
+                   HERKL
+               </th>
+               <th class="bg-primary">
+                   BUKRS
+               </th>
+               <th class="bg-primary">
+                   WERKS
+               </th>
+               <th class="bg-primary">
+                   VKORG
+               </th>
+               <th class="bg-primary">
+                   VTWEG
+               </th>
+               <th class="bg-primary">
+                   SPART
+               </th>
+               <th class="bg-primary">
+                   SLOC
+               </th>
+               <th class="bg-primary">
+                   EKORG
+               </th>
+               <th class="bg-primary">
+                   EKGRP
+               </th>
+               <th class="bg-primary">
+                   INFNR
+               </th>
+               <th class="bg-primary">
+                   KSCHL
+               </th>
+               <th class="bg-primary">
+                   WAERS
+               </th>
+               <th class="bg-primary">
+                   Master condition records for PO's
+               </th>
+               <th class="bg-primary">
+                   BSTAE
+               </th>
+               <th class="bg-primary">
+                   DOCTYPE
+               </th>
+               <th class="bg-primary">
+                   KUNWE
+               </th>
+               <th class="bg-primary">
+                   KUNRE
+               </th>
+               <th class="bg-primary">
+                   INCO1
+               </th>
+               <th class="bg-primary">
+                   KUNAG
+               </th>
+               <th class="bg-primary">
+                   KUNRG
+               </th>
+               <th class="bg-primary">
+                   LIFNR
+               </th>
+               <th class="bg-primary">
+                   LIFN2
+               </th>
+               <th class="bg-primary">
+                   KTGRD
+               </th>
+               <th class="bg-primary">
+                   LZONE
+               </th>
+               <th class="bg-primary">
+                   BWART
+               </th>
+               <th class="bg-primary">
+                   ZTERM
+               </th>
+               <th class="bg-primary">
+                   DATE
+               </th>
+               <th class="bg-primary">
+                   TIME
+               </th>
+               <th class="bg-primary">
+                   USER
+               </th>
+           </tr>
+
+           @foreach (LaneMasterRecord record in Model.LaneMaster)
+           {
+               <tr>
+                   <td>@record.Lane</td>
+                   <td>@record.Origin</td>
+                   <td>@record.Destination</td>
+                   <td>@record.MTART</td>
+                   <td>@record.Leg</td>
+                   <td>@record.Site</td>
+                   <td>@record.SYSID</td>
+                   <td>@record.Scenario</td>
+                   <td>@record.HERKL</td>
+                   <td>@record.BUKRS</td>
+                   <td>@record.WERKS</td>
+                   <td>@record.VKORG</td>
+                   <td>@record.VTWEG</td>
+                   <td>@record.SPART</td>
+                   <td>@record.SLOC</td>
+                   <td>@record.EKORG</td>
+                   <td>@record.EKGRP</td>
+                   <td>@record.INFNR</td>
+                   <td>@record.KSCHL</td>
+                   <td>@record.WAERS</td>
+                   <td>@record.MasterConditionRecordForPO</td>
+                   <td>@record.BSTAE</td>
+                   <td>@record.DOCTYPE</td>
+                   <td>@record.KUNWE</td>
+                   <td>@record.KUNRE</td>
+                   <td>@record.INCO1</td>
+                   <td>@record.KUNAG</td>
+                   <td>@record.KUNRG</td>
+                   <td>@record.LIFNR</td>
+                   <td>@record.LIFN2</td>
+                   <td>@record.KTGRD</td>
+                   <td>@record.LZONE</td>
+                   <td>@record.BWART</td>
+                   <td>@record.ZTERM</td>
+                   <td>@record.DateTime.ToString("MM/dd/yy")</td>
+                   <td>@record.DateTime.ToString("hh:mm:ss")</td>
+                   <td>@record.User</td>
+               </tr>
+           }
+       </table>
+   </div>
+}

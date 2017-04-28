@@ -1,0 +1,90 @@
+@using MDValidator.App.Models
+@using MDValidator.App.Areas.Configuration.Models.ExtractionRules
+@using MDValidator.Domain.Configuration.ExtractionRules
+
+@model ItemsViewModel
+
+@{
+    ViewData["Title"] = "Items-Extraction Rules";
+}
+
+@if (Model.Errors != null && Model.Errors.Count > 0)
+{
+    @await Html.PartialAsync("_ErrorSummary", Model.Errors)
+}
+
+<section class="controls well well-lg">
+    @await Html.PartialAsync("_FileUploadControl", new FileUploadControlViewModel("Upload Items File"))
+    <button class="btn btn-success"><i class="fa fa-download fa-fw"></i> Download</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" onclick="saveRuleConfiguration('/Configuration/ExtractionRules/SaveItems')"><i class="fa fa-save fa-fw"></i> Save</button>
+</section>
+
+<br />
+
+@if ((Model.Errors != null && Model.Errors.Count == 0) && (Model.Items != null && Model.Items.Count > 0))
+{
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-hover table-striped">
+            <tr>
+                <th class="bg-primary">
+                    EXTRID
+                </th>
+                <th class="bg-primary">
+                    STEP
+                </th>
+                <th class="bg-primary">
+                    CONTROL
+                </th>
+                <th class="bg-primary">
+                    TABLE
+                </th>
+                <th class="bg-primary">
+                    FIELD
+                </th>
+                <th class="bg-primary">
+                    COMMAND
+                </th>
+                <th class="bg-primary">
+                    PARAM_TABLE
+                </th>
+                <th class="bg-primary">
+                    PARAM_FIELD
+                </th>
+                <th class="bg-primary">
+                    PARAMETER
+                </th>
+                <th class="bg-primary">
+                    CONNECTOR
+                </th>
+                <th class="bg-primary">
+                    DATE
+                </th>
+                <th class="bg-primary">
+                    TIME
+                </th>
+                <th class="bg-primary">
+                    USER
+                </th>
+            </tr>
+
+            @foreach (Item item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ExtrId</td>
+                    <td>@item.Step</td>
+                    <td>@item.Control</td>
+                    <td>@item.Table</td>
+                    <td>@item.Field</td>
+                    <td>@item.Command</td>
+                    <td>@item.ParamTable</td>
+                    <td>@item.ParamField</td>
+                    <td>@item.Parameter</td>
+                    <td>@item.Connector</td>
+                    <td>@item.DateTime.ToString("mm/dd/yy")</td>
+                    <td>@item.DateTime.ToString("hh:mm:ss")</td>
+                    <td>@item.User</td>
+                </tr>
+            }
+        </table>
+    </div>
+}

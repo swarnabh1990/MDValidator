@@ -1,0 +1,63 @@
+@using MDValidator.Domain.Validation
+@using MDValidator.App.Areas.Validation.Models.Validation
+@using MDValidator.App.Models
+
+@model OfficialListViewModel
+@{
+    ViewData["Title"] = "Validation";
+}
+
+@if (Model.Errors != null && Model.Errors.Count > 0)
+{
+    @await Html.PartialAsync("_ErrorSummary", Model.Errors)
+}
+
+<section class="controls well well-lg"> 
+    @await Html.PartialAsync("_FileUploadControl", new FileUploadControlViewModel("Upload Official List File"))   
+    <button class="btn btn-success"><i class="fa fa-check-square-o fa-fw"></i> Validate</button>&nbsp;&nbsp;
+    <button class="btn btn-primary"><i class="fa fa-list-alt fa-fw"></i> Log</button>
+</section>
+
+<br />
+
+@if ((Model.Errors != null && Model.Errors.Count == 0) && (Model.OfficialList !=null && Model.OfficialList.Entries.Count > 0))
+{
+    <section class="data">        
+
+        <p>Official List : <strong>@Model.OfficialList.Name</strong></p>
+
+        <div class="table-responsive">
+            <table class="table table-condensed table-bordered table-hover table-responsive table-striped">
+                <tr>
+                    <th class="bg-primary">
+                        Lane
+                    </th>
+                    <th class="bg-primary">
+                        Origin
+                    </th>
+                    <th class="bg-primary">
+                        Destination
+                    </th>
+                    <th class="bg-primary">
+                        MTART
+                    </th>
+                    <th class="bg-primary">
+                        MATNR
+                    </th>
+                </tr>
+
+                @foreach (OfficialListEntry entry in Model.OfficialList.Entries)
+                {
+                    <tr>
+                        <td>@entry.Lane</td>
+                        <td>@entry.Origin</td>
+                        <td>@entry.Destination</td>
+                        <td>@entry.MTART</td>
+                        <td>@entry.MATNR</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        
+    </section>
+}

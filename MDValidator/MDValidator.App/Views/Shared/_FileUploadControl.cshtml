@@ -1,0 +1,10 @@
+﻿@using MDValidator.App.Models
+@model FileUploadControlViewModel
+
+<div class="fileUploadControl">
+    <form class="fileUploadForm" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" accept="xls, xslx" />
+        @*<input type="submit" value="Upload Official List File" class="btn btn-primary"/>*@
+    </form>
+    <button class="btn btn-primary btnSelectFile"><i class="fa fa-upload fa-fw"></i> @Model.UploadBtnText</button>
+</div>&nbsp;&nbsp;

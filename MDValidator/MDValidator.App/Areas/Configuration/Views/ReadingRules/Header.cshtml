@@ -1,0 +1,63 @@
+@using MDValidator.App.Models
+@using MDValidator.App.Areas.Configuration.Models.ReadingRules
+@using MDValidator.Domain.Configuration.ReadingRules
+
+@model HeadersViewModel
+
+@{
+    ViewData["Title"] = "Header-Reading Rules";
+}
+
+@if (Model.Errors != null && Model.Errors.Count > 0)
+{
+    @await Html.PartialAsync("_ErrorSummary", Model.Errors)
+}
+
+<section class="controls well well-lg">
+    @await Html.PartialAsync("_FileUploadControl", new FileUploadControlViewModel("Upload Header File"))
+    <button class="btn btn-success"><i class="fa fa-download fa-fw"></i> Download</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" onclick="saveRuleConfiguration('/Configuration/ReadingRules/SaveHeader')"><i class="fa fa-save fa-fw"></i> Save</button>
+</section>
+
+<br />
+
+@if ((Model.Errors != null && Model.Errors.Count == 0) && (Model.Headers != null && Model.Headers.Count > 0))
+{
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-hover table-striped">
+            <tr>
+                <th class="bg-primary">
+                    READID
+                </th>
+                <th class="bg-primary">
+                    TABLE
+                </th>
+                <th class="bg-primary">
+                    HIERARCHY
+                </th>
+                <th class="bg-primary">
+                    DATE
+                </th>
+                <th class="bg-primary">
+                    TIME
+                </th>
+                <th class="bg-primary">
+                    USER
+                </th>
+            </tr>
+
+            @foreach (Header header in Model.Headers)
+            {
+                <tr>
+                    <td>@header.ReadId</td>
+                    <td>@header.Table</td>
+                    <td>@header.Hierarchy</td>
+                    <td>@header.DateTime.ToString("mm/dd/yy")</td>
+                    <td>@header.DateTime.ToString("hh:mm:ss")</td>
+                    <td>@header.User</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
